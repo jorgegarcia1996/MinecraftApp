@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "528844995461",
+    "firebase_url": "https://minecraft-app-c890d.firebaseio.com",
+    "project_id": "minecraft-app-c890d",
+    "storage_bucket": "minecraft-app-c890d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528844995461:android:147998484f57821c7362ec",
+        "android_client_info": {
+          "package_name": "com.jgm.minecraftapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528844995461-sr6293vljrh18bkk6loukj6hub3os4ll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jgm.minecraftapp",
+            "certificate_hash": "d9979fd2ea2983715887a71e535838c6bbba51b1"
+          }
+        },
+        {
+          "client_id": "528844995461-61v82qmivkdf9fcp2vch5dnu4n4feuoo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkymk3VGcxE0gxqe7sDGVk7RR8gQyKykk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528844995461-61v82qmivkdf9fcp2vch5dnu4n4feuoo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
