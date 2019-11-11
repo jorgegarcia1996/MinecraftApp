@@ -4,4 +4,20 @@
     <string name="password_hint">Contraseña</string>
     <string name="login_button">Entrar</string>
     <string name="register_button">Registrarse</string>
+    <string name="toast_bad_user_password">Tu usuario o contraseña son incorrectos</string>
+    <string name="toast_login_error">Error al entrar.</string>
+    <string name="name_hint">Nombre</string>
+    <string name="last_name_hint">Apellidos</string>
+    <string name="repeat_password_hint">Repita la contraseña</string>
+    <string-array name="arr_paises">
+        <item>España</item>
+        <item>Francia</item>
+        <item>Reino Unido</item>
+        <item>Japón</item>
+        <item>Italia</item>
+    </string-array>
+    <string name="cancel_button">Cancelar</string>
+    <string name="toast_register_success">Registro completado</string>
+    <string name="toast_register_cancel">Registro cancelado</string>
+    <string name="toast_register_empty_field">Campos vacíos</string>
 </resources>

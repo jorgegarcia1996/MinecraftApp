@@ -4,4 +4,21 @@
     <string name="password_hint">Password</string>
     <string name="login_button">Login</string>
     <string name="register_button">Register</string>
+    <string name="logo_description" translatable="false">Minecraft PMDM Edition Deluxe HD</string>
+    <string name="toast_bad_user_password">Your username or password are incorrect.</string>
+    <string name="toast_login_error">Failed to login.</string>
+    <string name="name_hint">First name</string>
+    <string name="last_name_hint">Last name</string>
+    <string name="repeat_password_hint">Repeat password</string>
+    <string-array name="arr_paises">
+        <item>Spain</item>
+        <item>France</item>
+        <item>United kingdom</item>
+        <item>Japan</item>
+        <item>Italy</item>
+    </string-array>
+    <string name="cancel_button">Cancel</string>
+    <string name="toast_register_success">Register completed</string>
+    <string name="toast_register_cancel">Register canceled</string>
+    <string name="toast_register_empty_field">Empty fields</string>
 </resources>
