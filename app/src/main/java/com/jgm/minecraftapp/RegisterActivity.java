@@ -1,5 +1,6 @@
 package com.jgm.minecraftapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -9,6 +10,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,8 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        fbAuth = FirebaseAuth.getInstance();
 
         email = findViewById(R.id.registerTextUsernameInput);
         firstName = findViewById(R.id.registerTextNameInput);
@@ -53,6 +55,23 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), R.string.toast_register_empty_field, Toast.LENGTH_LONG).show();
                     return;
                 }
+
+                if (!pass.equals(repPass)) {
+                    Toast.makeText(getApplicationContext(), R.string.toast_register_bad_password, Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                fbAuth = FirebaseAuth.getInstance();
+                fbDb = FirebaseDatabase.getInstance();
+
+                fbAuth.createUserWithEmailAndPassword(ema, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+
+                        }
+                    }
+                });
             }
         });
 
