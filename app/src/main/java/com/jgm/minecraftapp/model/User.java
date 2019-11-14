@@ -1,6 +1,8 @@
 package com.jgm.minecraftapp.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private String nombre, apellidos, email, nacionalidad;
 

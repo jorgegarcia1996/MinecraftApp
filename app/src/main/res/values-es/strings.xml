@@ -22,5 +22,7 @@
     <string name="toast_register_empty_field">Campos vacíos</string>
     <string name="toast_register_bad_password">Las contraseñas no coinciden</string>
     <string name="toast_register_error">El registro a falldo, inténtelo de nuevo más tarde</string>
-    <string name="main_welcome">Mensaje de bienvenida</string>
+    <string name="main_welcome">Bienvenido</string>
+    <string name="main_menu_logout">Salir</string>
+    <string name="toast_logout_success">Gracias por usar la App</string>
 </resources>

@@ -26,6 +26,7 @@ import com.jgm.minecraftapp.model.User;
 public class LoginActivity extends AppCompatActivity {
 
     private final int REG_CODE = 17;
+    private final int LOGIN_CODE = 18;
 
     private Button btnLogin, btnRegister;
     private FirebaseAuth fbAuth;
@@ -80,8 +81,13 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if(dataSnapshot.hasChildren()) {
+                                    User user = dataSnapshot.getValue(User.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable("userData", user);
+
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(intent);
+                                    intent.putExtras(bundle);
+                                    startActivityForResult(intent, LOGIN_CODE);
                                 }
                             }
 
@@ -95,7 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             });
-
         });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +124,12 @@ public class LoginActivity extends AppCompatActivity {
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(), R.string.toast_register_cancel, Toast.LENGTH_LONG).show();
             }
+        } else if (requestCode == LOGIN_CODE) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(getApplicationContext(), R.string.toast_logout_success, Toast.LENGTH_LONG).show();
+            }
         }
+        email.setText("");
+        password.setText("");
     }
 }
