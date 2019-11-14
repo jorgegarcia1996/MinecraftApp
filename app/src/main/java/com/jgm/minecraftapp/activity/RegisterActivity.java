@@ -1,4 +1,4 @@
-package com.jgm.minecraftapp;
+package com.jgm.minecraftapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +14,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.jgm.minecraftapp.R;
+import com.jgm.minecraftapp.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -44,11 +47,11 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String ema = email.getText().toString();
-                String name = firstName.getText().toString();
-                String lName = lastName.getText().toString();
-                String pass = password.getText().toString();
-                String repPass = repeatPassword.getText().toString();
+                String ema = getField(email);
+                String name = getField(firstName);
+                String lName = getField(lastName);
+                String pass = getField(password);
+                String repPass = getField(repeatPassword);
                 String nac = nacionality.getSelectedItem().toString();
 
                 if (ema.isEmpty() || name.isEmpty() || lName.isEmpty() || pass.isEmpty() || repPass.isEmpty()) {
@@ -68,14 +71,36 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
+                            String uid = fbAuth.getCurrentUser().getUid();
+                            User user = new User(name, lName, ema, nac );
 
+                            DatabaseReference dbRef = fbDb.getReference("usuarios");
+                            dbRef.child(uid).setValue(user);
+
+                            fbAuth.signOut();
+                            setResult(RESULT_OK);
+                            finish();
+                            return;
+                        } else {
+                            Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
             }
         });
 
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_CANCELED);
+                finish();
+                return;
+            }
+        });
 
+    }
 
+    private String getField(EditText editText) {
+        return editText.getText().toString().trim();
     }
 }

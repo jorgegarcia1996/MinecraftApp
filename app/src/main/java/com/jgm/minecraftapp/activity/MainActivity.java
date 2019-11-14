@@ -1,8 +1,10 @@
-package com.jgm.minecraftapp;
+package com.jgm.minecraftapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.jgm.minecraftapp.R;
 
 public class MainActivity extends AppCompatActivity {
 

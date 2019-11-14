@@ -21,4 +21,6 @@
     <string name="toast_register_cancel">Registro cancelado</string>
     <string name="toast_register_empty_field">Campos vacíos</string>
     <string name="toast_register_bad_password">Las contraseñas no coinciden</string>
+    <string name="toast_register_error">El registro a falldo, inténtelo de nuevo más tarde</string>
+    <string name="main_welcome">Mensaje de bienvenida</string>
 </resources>

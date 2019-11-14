@@ -1,4 +1,4 @@
-package com.jgm.minecraftapp;
+package com.jgm.minecraftapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jgm.minecraftapp.R;
 import com.jgm.minecraftapp.model.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -79,9 +80,8 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if(dataSnapshot.hasChildren()) {
-                                    User usuario = dataSnapshot.getValue(User.class);
-
-                                    Toast.makeText(getApplicationContext(), usuario.toString(), Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
                                 }
                             }
 
@@ -96,15 +96,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
 
-            btnRegister.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                    startActivityForResult(intent, REG_CODE);
-                }
-            });
         });
 
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivityForResult(intent, REG_CODE);
+            }
+        });
 
 
 
