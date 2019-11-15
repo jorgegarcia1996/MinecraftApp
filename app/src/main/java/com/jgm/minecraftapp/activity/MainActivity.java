@@ -3,12 +3,17 @@ package com.jgm.minecraftapp.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
+import com.squareup.picasso.Picasso;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FileDownloadTask;
@@ -22,8 +27,11 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity {
 
     private TextView welcome;
+    private ImageView dirt;
 
     private FirebaseAuth fbAuth;
+
+    //Variable Storage de firebase storage
     private StorageReference storage;
 
     @Override
@@ -32,22 +40,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         fbAuth = FirebaseAuth.getInstance();
+
+        //Coger la referencia de fireebase Storage
         storage = FirebaseStorage.getInstance().getReference();
 
         welcome = findViewById(R.id.mainWelcomeText);
+        dirt = findViewById(R.id.dirtTest);
 
         Bundle bundle = getIntent().getExtras();
         User user = (User) bundle.getSerializable("userData");
 
         welcome.setText(user.toString());
 
-       /* File test = File.createTempFile("blocks", "png");
-        storage.getFile(test).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+        //Establecer la imagen en storage en un imageview
+        storage.child("blocks/Dirt.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(dirt);
             }
-        })*/
+        });
+
+
     }
     //Menú principal
     @Override
