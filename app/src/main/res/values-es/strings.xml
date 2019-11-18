@@ -25,4 +25,6 @@
     <string name="main_welcome">Bienvenido</string>
     <string name="main_menu_logout">Salir</string>
     <string name="toast_logout_success">Gracias por usar la App</string>
+    <string name="main_menu_profile">Perfil</string>
+    <string name="bottom_menu_blocks">Bloques</string>
 </resources>

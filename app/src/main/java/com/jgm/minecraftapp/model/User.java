@@ -4,16 +4,17 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    private String nombre, apellidos, email, nacionalidad;
+    private String nombre, apellidos, email, nacionalidad, image;
 
     public User() {
     }
 
-    public User(String nombre, String apellidos, String email, String nacionalidad) {
+    public User(String nombre, String apellidos, String email, String nacionalidad, String image) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
         this.nacionalidad = nacionalidad;
+        this.image = image;
     }
 
     public String getNombre() {
@@ -46,6 +47,14 @@ public class User implements Serializable {
 
     public void setNacionalidad(String nacionalidad) {
         this.nacionalidad = nacionalidad;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override

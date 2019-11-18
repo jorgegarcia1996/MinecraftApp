@@ -72,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
                             String uid = fbAuth.getCurrentUser().getUid();
-                            User user = new User(name, lName, ema, nac );
+                            User user = new User(name, lName, ema, nac, "users/Default-Profile.png" );
 
                             DatabaseReference dbRef = fbDb.getReference("usuarios");
                             dbRef.child(uid).setValue(user);

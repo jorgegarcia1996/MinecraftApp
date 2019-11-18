@@ -4,4 +4,7 @@
     <item
         android:id="@+id/mainMenuLogOut"
         android:title="@string/main_menu_logout"/>
+    <item
+        android:id="@+id/mainMenuProfile"
+        android:title="@string/main_menu_profile"/>
 </menu>

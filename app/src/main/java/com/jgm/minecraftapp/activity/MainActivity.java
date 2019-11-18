@@ -2,9 +2,14 @@ package com.jgm.minecraftapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.jgm.minecraftapp.fragment.BlocksFragment;
+import com.jgm.minecraftapp.fragment.MobsFragment;
 import com.squareup.picasso.Picasso;
 import android.util.Log;
 import android.view.Menu;
@@ -26,13 +31,11 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView welcome;
-    private ImageView dirt;
-
     private FirebaseAuth fbAuth;
 
-    //Variable Storage de firebase storage
-    private StorageReference storage;
+    private BottomNavigationView bottomNav;
+
+    private Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,24 +44,25 @@ public class MainActivity extends AppCompatActivity {
 
         fbAuth = FirebaseAuth.getInstance();
 
-        //Coger la referencia de fireebase Storage
-        storage = FirebaseStorage.getInstance().getReference();
+        bottomNav = findViewById(R.id.bottomNavigationMenu);
 
-        welcome = findViewById(R.id.mainWelcomeText);
-        dirt = findViewById(R.id.dirtTest);
-
-        Bundle bundle = getIntent().getExtras();
-        User user = (User) bundle.getSerializable("userData");
-
-        welcome.setText(user.toString());
-
-        //Establecer la imagen en storage en un imageview
-        storage.child("blocks/Dirt.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(dirt);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()) {
+                    case R.id.bottomMenuBlocks:
+                        fragment = new BlocksFragment();
+                        break;
+
+                    case R.id.bottomMenuMobs:
+                        fragment = new MobsFragment();
+                        break;
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+                return true;
             }
         });
+
 
 
     }

@@ -3,4 +3,6 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="blocksFragment">#1634FF</color>
+    <color name="mobsFragment">#92FF16</color>
 </resources>
