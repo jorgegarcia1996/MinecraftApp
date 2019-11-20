@@ -34,6 +34,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        getSupportActionBar().hide();
+
         email = findViewById(R.id.registerTextUsernameInput);
         firstName = findViewById(R.id.registerTextNameInput);
         lastName = findViewById(R.id.registerTextLastNameInput);

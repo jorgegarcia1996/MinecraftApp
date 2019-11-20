@@ -38,6 +38,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //Quitar la barra superior
+        getSupportActionBar().hide();
+
         //Instancia de FB Auth
         fbAuth = FirebaseAuth.getInstance();
 
@@ -46,6 +49,10 @@ public class LoginActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.loginRegisterButton);
         email = findViewById(R.id.loginTextUsernameInput);
         password = findViewById(R.id.loginTextPasswordInput);
+
+        //Quitar al completar la app
+        email.setText("admin@gmail.com");
+        password.setText("123456");
 
         //Login
         btnLogin.setOnClickListener(v -> {

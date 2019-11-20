@@ -35,37 +35,59 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNav;
 
-    private Fragment fragment;
+    private Fragment blocksFrgment = new BlocksFragment();
+    private Fragment mobsFragment = new MobsFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Editar Barra de accion
+        getSupportActionBar().setTitle(R.string.app_name);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.app_icon_round);
+
+        //FB Auth
         fbAuth = FirebaseAuth.getInstance();
 
+        //BottonNav
         bottomNav = findViewById(R.id.bottomNavigationMenu);
 
+        //Cargar primer fragmento
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainerLayout, new BlocksFragment())
+                .commit();
+
+        //Acciones del bottomNav
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
                     case R.id.bottomMenuBlocks:
-                        fragment = new BlocksFragment();
+                        if (!isLoaded(blocksFrgment.getClass().getSimpleName())) {
+                            getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.fragmentContainerLayout, blocksFrgment)
+                                    .commit();
+                        }
                         break;
 
                     case R.id.bottomMenuMobs:
-                        fragment = new MobsFragment();
+                        if (!isLoaded(mobsFragment.getClass().getSimpleName())) {
+                            getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.fragmentContainerLayout, mobsFragment)
+                                    .commit();
+                        }
                         break;
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
                 return true;
             }
         });
-
-
-
     }
+
     //Menú principal
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
     //Opciones del menú principal
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.mainMenuLogOut:
                 //Hacer el logout en firebase y la API
@@ -88,7 +109,11 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean isLoaded(String fClass) {
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerLayout);
+        return (f != null) && (f.getClass().getSimpleName().equals(fClass));
     }
 }
