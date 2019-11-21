@@ -26,4 +26,6 @@
     <string name="toast_logout_success">Gracias por usar la App</string>
     <string name="main_menu_profile">Perfil</string>
     <string name="bottom_menu_blocks">Bloques</string>
+    <string name="profile_picture_description">Imagen de perfil</string>
+    <string name="profile_load_iamge_fail">Error al cargar la imagen de perfil</string>
 </resources>

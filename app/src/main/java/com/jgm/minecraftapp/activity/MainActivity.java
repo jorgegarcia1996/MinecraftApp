@@ -1,9 +1,11 @@
 package com.jgm.minecraftapp.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -34,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth fbAuth;
 
     private BottomNavigationView bottomNav;
-
-    private Fragment blocksFrgment = new BlocksFragment();
+    private Fragment blocksFragment = new BlocksFragment();
     private Fragment mobsFragment = new MobsFragment();
 
     @Override
@@ -66,10 +67,10 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
                     case R.id.bottomMenuBlocks:
-                        if (!isLoaded(blocksFrgment.getClass().getSimpleName())) {
+                        if (!isLoaded(blocksFragment.getClass().getSimpleName())) {
                             getSupportFragmentManager()
                                     .beginTransaction()
-                                    .replace(R.id.fragmentContainerLayout, blocksFrgment)
+                                    .replace(R.id.fragmentContainerLayout, blocksFragment)
                                     .commit();
                         }
                         break;
@@ -108,6 +109,11 @@ public class MainActivity extends AppCompatActivity {
                 setResult(RESULT_OK);
                 finish();
                 return true;
+            case R.id.mainMenuProfile:
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                intent.putExtras(getIntent().getExtras());
+                startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

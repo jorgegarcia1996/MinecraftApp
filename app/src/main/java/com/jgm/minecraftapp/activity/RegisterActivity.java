@@ -3,6 +3,7 @@ package com.jgm.minecraftapp.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,18 +12,29 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.jgm.minecraftapp.R;
 import com.jgm.minecraftapp.model.User;
+
+import java.io.File;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth fbAuth;
     private FirebaseDatabase fbDb;
+    private FirebaseStorage storage;
+    private StorageReference defaultProfile;
 
     private EditText email, firstName, lastName, password, repeatPassword;
     private Spinner nacionality;
@@ -68,13 +80,17 @@ public class RegisterActivity extends AppCompatActivity {
 
                 fbAuth = FirebaseAuth.getInstance();
                 fbDb = FirebaseDatabase.getInstance();
+                storage = FirebaseStorage.getInstance();
 
                 fbAuth.createUserWithEmailAndPassword(ema, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             String uid = fbAuth.getCurrentUser().getUid();
-                            User user = new User(name, lName, ema, nac, "users/Default-Profile.png" );
+                            String profile = storage.getReference().child("users").child("profile.png").getPath();
+
+
+                            User user = new User(name, lName, ema, nac, profile);
 
                             DatabaseReference dbRef = fbDb.getReference("usuarios");
                             dbRef.child(uid).setValue(user);
@@ -84,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                             finish();
                             return;
                         } else {
-                            Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Fallo al crear el usuario", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
