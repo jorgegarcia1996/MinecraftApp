@@ -1,35 +1,20 @@
 package com.jgm.minecraftapp.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.jgm.minecraftapp.fragment.BlocksFragment;
-import com.jgm.minecraftapp.fragment.MobsFragment;
-import com.squareup.picasso.Picasso;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.jgm.minecraftapp.R;
-import com.jgm.minecraftapp.model.User;
-
-import java.io.File;
+import com.jgm.minecraftapp.fragment.BlocksFragment;
+import com.jgm.minecraftapp.fragment.MobsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
