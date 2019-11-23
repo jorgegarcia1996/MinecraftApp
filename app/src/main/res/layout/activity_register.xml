@@ -113,7 +113,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
-            android:id="@+id/registerSpinnerNacionality"
+            android:id="@+id/registerSpinnerNationality"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -131,7 +131,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registerSpinnerNacionality" />
+            app:layout_constraintTop_toBottomOf="@+id/registerSpinnerNationality" />
 
         <Button
             android:id="@+id/registerCancelButton"
