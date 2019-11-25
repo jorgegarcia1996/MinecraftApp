@@ -28,4 +28,6 @@
     <string name="bottom_menu_blocks">Bloques</string>
     <string name="profile_picture_description">Imagen de perfil</string>
     <string name="profile_load_iamge_fail">Error al cargar la imagen de perfil</string>
+    <string name="bottom_menu_home">Inicio</string>
+    <string name="home_app_description">Descripción de la app</string>
 </resources>

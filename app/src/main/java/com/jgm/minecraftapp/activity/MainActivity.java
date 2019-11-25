@@ -14,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.jgm.minecraftapp.R;
 import com.jgm.minecraftapp.fragment.BlocksFragment;
+import com.jgm.minecraftapp.fragment.HomeFragment;
 import com.jgm.minecraftapp.fragment.MobsFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth fbAuth;
 
     private BottomNavigationView bottomNav;
+    private Fragment homeFragment = new HomeFragment();
     private Fragment blocksFragment = new BlocksFragment();
     private Fragment mobsFragment = new MobsFragment();
 
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         //Cargar primer fragmento
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragmentContainerLayout, new BlocksFragment())
+                .replace(R.id.fragmentContainerLayout, homeFragment)
                 .commit();
 
         //Acciones del bottomNav
@@ -51,6 +53,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
+                    case R.id.bottomMenuHome:
+                        if (!isLoaded(homeFragment.getClass().getSimpleName())) {
+                            getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.fragmentContainerLayout, homeFragment)
+                                    .commit();
+                        }
+
+                        break;
+
                     case R.id.bottomMenuBlocks:
                         if (!isLoaded(blocksFragment.getClass().getSimpleName())) {
                             getSupportFragmentManager()

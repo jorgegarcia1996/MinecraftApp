@@ -2,6 +2,7 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:id="@+id/bottomMenuHome" android:title="@string/bottom_menu_home"/>
     <item android:id="@+id/bottomMenuBlocks" android:title="@string/bottom_menu_blocks" />
     <item android:id="@+id/bottomMenuMobs" android:title="@string/bottom_menu_mobs"/>
 </menu>
