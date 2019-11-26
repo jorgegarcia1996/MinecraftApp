@@ -1,9 +1,36 @@
 package com.jgm.minecraftapp.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Block {
 
-    private String nameSpace, drop, image, name, tool;
+    @Expose
+    @SerializedName("nameSpace")
+    private String nameSpace;
+
+    @Expose
+    @SerializedName("drop")
+    private String drop;
+
+    @Expose
+    @SerializedName("img")
+    private String image;
+
+    @Expose
+    @SerializedName("nombre")
+    private String name;
+
+    @Expose
+    @SerializedName("tool")
+    private String tool;
+
+    @Expose
+    @SerializedName("stack")
     private Integer stack;
+
+    @Expose
+    @SerializedName("transparent")
     private boolean transparent;
 
     public Block(String nameSpace, String drop, String image, String name, String tool, Integer stack, boolean transparent) {
@@ -14,9 +41,6 @@ public class Block {
         this.tool = tool;
         this.stack = stack;
         this.transparent = transparent;
-    }
-
-    public Block() {
     }
 
     public String getNameSpace() {
