@@ -29,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     private StorageReference defaultProfile;
 
     private EditText email, firstName, lastName, password, repeatPassword;
-    private Spinner nacionality;
+    private Spinner nationality;
 
     private Button btnRegister, btnCancel;
 
@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         lastName = findViewById(R.id.registerTextLastNameInput);
         password = findViewById(R.id.registerTextPasswordInput);
         repeatPassword = findViewById(R.id.registerTextRepeatPasswordInput);
-        nacionality = findViewById(R.id.registerSpinnerNacionality);
+        nationality = findViewById(R.id.registerSpinnerNationality);
         btnRegister = findViewById(R.id.registerRegisterButton);
         btnCancel = findViewById(R.id.registerCancelButton);
 
@@ -58,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String lName = getField(lastName);
                 String pass = getField(password);
                 String repPass = getField(repeatPassword);
-                String nac = nacionality.getSelectedItem().toString();
+                String nac = nationality.getSelectedItem().toString();
 
                 if (ema.isEmpty() || name.isEmpty() || lName.isEmpty() || pass.isEmpty() || repPass.isEmpty()) {
                     Toast.makeText(getApplicationContext(), R.string.toast_register_empty_field, Toast.LENGTH_LONG).show();
