@@ -1,8 +1,10 @@
 package com.jgm.minecraftapp.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView firstNameText, lastNameText, nationalityText;
     private EditText firstNameEdit, lastNameEdit;
     private Spinner nationalitySpinner;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +67,10 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.profile_activity_name);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.app_icon_round);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Cojer los datos del usuario
-        Bundle bundle = getIntent().getExtras();
+        bundle = getIntent().getExtras();
         user = (User) bundle.getSerializable("userData");
         String uid = auth.getCurrentUser().getUid();
 
@@ -123,6 +127,7 @@ public class ProfileActivity extends AppCompatActivity {
                 updateFields();
             }
         });
+        bundle.putSerializable("userData", user);
 
     }
 
@@ -171,5 +176,12 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
         return 0;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        return true;
     }
 }
