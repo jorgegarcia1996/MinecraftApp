@@ -6,8 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -45,19 +43,23 @@ public class BlocksFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflar el layout del fragmento en el container
         View blocksView = inflater.inflate(R.layout.fragment_blocks, container, false);
+
+        //Adaptador
+        blockAdapter = new BlockAdapter(getActivity());
+
+        //Recycler
         blocksRecycler = blocksView.findViewById(R.id.fragmentBlocksRecycler);
         blocksRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        blockAdapter = new BlockAdapter(getActivity());
         blocksRecycler.setAdapter(blockAdapter);
 
+        //Inicializar el array
         blocksList = new ArrayList<>();
 
+        //Recoger los datos de la base de datos
         fbDb = FirebaseDatabase.getInstance();
         DatabaseReference blocksRef = fbDb.getReference("bloques/");
-
         blocksRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -65,6 +67,7 @@ public class BlocksFragment extends Fragment {
                         Block block = dSnap.getValue(Block.class);
                         blocksList.add(block);
                     }
+                    //Enviar los datos al adaptador
                     blockAdapter.setData(blocksList);
             }
 
@@ -75,6 +78,7 @@ public class BlocksFragment extends Fragment {
             }
         });
 
+        //Mostrar la vista
         return blocksView;
 
     }

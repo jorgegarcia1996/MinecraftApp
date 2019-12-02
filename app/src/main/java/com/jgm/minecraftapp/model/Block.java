@@ -17,16 +17,6 @@ public class Block  {
 
     private boolean transparent;
 
-    /*public Block(String nameSpace, String drop, String img, String nombre, String tool, Integer stack, boolean transparent) {
-        this.nameSpace = nameSpace;
-        this.drop = drop;
-        this.img = img;
-        this.nombre = nombre;
-        this.tool = tool;
-        this.stack = stack;
-        this.transparent = transparent;
-    }*/
-
     public Block() {
 
     }

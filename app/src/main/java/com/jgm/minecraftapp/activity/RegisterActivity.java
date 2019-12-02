@@ -38,8 +38,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        //Ocultar la barra de acción
         getSupportActionBar().hide();
 
+        //Instanciar las vistar
         email = findViewById(R.id.registerTextUsernameInput);
         firstName = findViewById(R.id.registerTextNameInput);
         lastName = findViewById(R.id.registerTextLastNameInput);
@@ -49,10 +51,12 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.registerRegisterButton);
         btnCancel = findViewById(R.id.registerCancelButton);
 
+        //Boton de registro
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //Recoger el valor de los campos
                 String ema = getField(email);
                 String name = getField(firstName);
                 String lName = getField(lastName);
@@ -60,27 +64,31 @@ public class RegisterActivity extends AppCompatActivity {
                 String repPass = getField(repeatPassword);
                 String nac = nationality.getSelectedItem().toString();
 
+                //Comprobar que todos los campos tengan algún valor
                 if (ema.isEmpty() || name.isEmpty() || lName.isEmpty() || pass.isEmpty() || repPass.isEmpty()) {
                     Toast.makeText(getApplicationContext(), R.string.toast_register_empty_field, Toast.LENGTH_LONG).show();
                     return;
                 }
 
+                //Comprobar la contraseña
                 if (!pass.equals(repPass)) {
                     Toast.makeText(getApplicationContext(), R.string.toast_register_bad_password, Toast.LENGTH_LONG).show();
                     return;
                 }
 
+                //Instancias de Firebase
                 fbAuth = FirebaseAuth.getInstance();
                 fbDb = FirebaseDatabase.getInstance();
                 storage = FirebaseStorage.getInstance();
 
+                //Proceso de registro
                 fbAuth.createUserWithEmailAndPassword(ema, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            //Registro satisfactorio
                             String uid = fbAuth.getCurrentUser().getUid();
                             String profile = storage.getReference().child("users").child("profile.png").getPath();
-
 
                             User user = new User(name, lName, ema, nac, profile);
 
@@ -92,6 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                             finish();
                             return;
                         } else {
+                            //Fallo en el registro
                             Toast.makeText(getApplicationContext(), "Fallo al crear el usuario", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -99,6 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        //Cancelar el registro
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

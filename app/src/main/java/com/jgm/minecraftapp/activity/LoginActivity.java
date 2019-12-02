@@ -50,10 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.loginTextUsernameInput);
         password = findViewById(R.id.loginTextPasswordInput);
 
-        //Quitar al completar la app
-        email.setText("admin@gmail.com");
-        password.setText("123456");
-
         //Login
         btnLogin.setOnClickListener(v -> {
             //Casting a string de email y password
@@ -72,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (!task.isSuccessful()) {
                         //En caso de fallo se muestra un mensaje de error
-                        Toast.makeText(getApplicationContext(), R.string.toast_login_error, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.toast_bad_user_password, Toast.LENGTH_LONG).show();
                         return;
                     } else {
 
@@ -110,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
             });
         });
 
+        //Botón de registro
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,13 +121,14 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        //Respuesta del registro
         if(requestCode == REG_CODE) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getApplicationContext(), R.string.toast_register_success, Toast.LENGTH_LONG).show();
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(), R.string.toast_register_cancel, Toast.LENGTH_LONG).show();
             }
+            //Respuesta de la main activiti
         } else if (requestCode == LOGIN_CODE) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getApplicationContext(), R.string.toast_logout_success, Toast.LENGTH_LONG).show();

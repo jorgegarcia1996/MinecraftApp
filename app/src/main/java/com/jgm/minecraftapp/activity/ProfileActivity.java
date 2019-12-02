@@ -1,8 +1,8 @@
 package com.jgm.minecraftapp.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,13 +27,15 @@ import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    private final int DEL_ACC_CODE = 31;
+
     private FirebaseStorage storage;
     private FirebaseDatabase database;
     private FirebaseAuth auth;
 
     private User user;
 
-    private Button editButton, confirmButton, cancelButton;
+    private Button editButton, confirmButton, cancelButton, deleteAccount;
 
     private ImageView profileImage;
     private TextView firstNameText, lastNameText, nationalityText;
@@ -46,6 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        //Instancias de firebase y las vistas
         storage = FirebaseStorage.getInstance();
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -53,6 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
         editButton = findViewById(R.id.profileEditButton);
         confirmButton = findViewById(R.id.profileConfirmChanges);
         cancelButton = findViewById(R.id.profileCancelChanges);
+        deleteAccount = findViewById(R.id.profileDeleteAccount);
 
         profileImage = findViewById(R.id.profilePicture);
         nationalityText = findViewById(R.id.profileNationalityText);
@@ -127,10 +131,40 @@ public class ProfileActivity extends AppCompatActivity {
                 updateFields();
             }
         });
+        //actualizar los datos del bundle
         bundle.putSerializable("userData", user);
+
+        //Borrar cuenta
+        deleteAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Crear el dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+                builder.setTitle(R.string.delete_acc_alert_title);
+                builder.setMessage(R.string.delete_acc_alert_message);
+                builder.setCancelable(false);
+                builder.setNegativeButton(R.string.delete_acc_alert_neg_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.setPositiveButton(R.string.delete_acc_alert_pos_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteAcc();
+                    }
+                });
+                //Mostrar el dialog
+                AlertDialog alert = builder.create();
+                alert.show();
+
+            }
+        });
 
     }
 
+    //Actualizar los campos
     private void updateFields() {
         firstNameText.setText(user.getNombre());
         lastNameText.setText(user.getApellidos());
@@ -141,8 +175,10 @@ public class ProfileActivity extends AppCompatActivity {
         nationalitySpinner.setSelection(getSpinnerIndex(nationalitySpinner, user.getNacionalidad()));
     }
 
+    //Habilitar la edición del usuario
     private void enableEdit() {
         editButton.setVisibility(View.GONE);
+        deleteAccount.setVisibility(View.GONE);
         confirmButton.setVisibility(View.VISIBLE);
         cancelButton.setVisibility(View.VISIBLE);
         firstNameText.setVisibility(View.GONE);
@@ -155,8 +191,10 @@ public class ProfileActivity extends AppCompatActivity {
         nationalitySpinner.setVisibility(View.VISIBLE);
     }
 
+    //Deshabilitar la edición del usuario
     private void disableEdit() {
         editButton.setVisibility(View.VISIBLE);
+        deleteAccount.setVisibility(View.VISIBLE);
         confirmButton.setVisibility(View.GONE);
         cancelButton.setVisibility(View.GONE);
         firstNameText.setVisibility(View.VISIBLE);
@@ -169,6 +207,7 @@ public class ProfileActivity extends AppCompatActivity {
         nationalitySpinner.setVisibility(View.GONE);
     }
 
+    //recoger el dato del spinner
     private int getSpinnerIndex(Spinner spinner, String nac) {
         for (int i = 0; i < spinner.getCount(); i++) {
             if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(nac)) {
@@ -178,10 +217,22 @@ public class ProfileActivity extends AppCompatActivity {
         return 0;
     }
 
+    //Volver al la actividad principal
     public boolean onOptionsItemSelected(MenuItem item){
         Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
         return true;
+    }
+
+    //Borrar cuenta
+    public void deleteAcc() {
+        String uid = auth.getCurrentUser().getUid();
+        auth.getCurrentUser().delete();
+        database.getReference("usuarios/").child(uid).removeValue();
+        Toast.makeText(getApplicationContext(), R.string.account_deleted, Toast.LENGTH_LONG).show();
+        setResult(DEL_ACC_CODE);
+        finish();
+        return;
     }
 }

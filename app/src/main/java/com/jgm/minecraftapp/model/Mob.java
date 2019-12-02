@@ -2,16 +2,8 @@ package com.jgm.minecraftapp.model;
 
 public class Mob {
 
-    private String behavior, image, name;
+    private String behavior, img, nombre;
     private Integer attack, health;
-
-    public Mob(String behavior, String image,String name, Integer attack, Integer health) {
-        this.behavior = behavior;
-        this.image = image;
-        this.name = name;
-        this.attack = attack;
-        this.health = health;
-    }
 
     public Mob() {
     }
@@ -24,20 +16,20 @@ public class Mob {
         this.behavior = behavior;
     }
 
-    public String getImage() {
-        return image;
+    public String getImg() {
+        return img;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImg(String image) {
+        this.img = image;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String name) {
+        this.nombre = name;
     }
 
     public Integer getAttack() {
@@ -58,6 +50,12 @@ public class Mob {
 
     @Override
     public String toString() {
-        return this.name;
+        return "Mob{" +
+                "behavior='" + behavior + '\'' +
+                ", img='" + img + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", attack=" + attack +
+                ", health=" + health +
+                '}';
     }
 }

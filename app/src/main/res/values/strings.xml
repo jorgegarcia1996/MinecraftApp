@@ -20,7 +20,7 @@
     <string name="cancel_button">Cancel</string>
     <string name="toast_register_success">Register completed</string>
     <string name="toast_register_cancel">Register canceled</string>
-    <string name="toast_register_empty_field">Empty fields</string>
+    <string name="toast_register_empty_field">Complete all the fields</string>
     <string name="toast_register_bad_password">Passwords are not the same</string>
     <string name="toast_register_error">Register failed, try again later</string>
     <string name="main_welcome">Welcome</string>
@@ -38,5 +38,11 @@
     <string name="nationality_hint">Nationality</string>
     <string name="profile_activity_name">Profile</string>
     <string name="bottom_menu_home">Home</string>
-    <string name="home_app_description">Description for the app</string>
+    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut elementum velit, eu molestie dolor. Cras non dignissim mi, ut sagittis urna. Proin dui justo, tincidunt vel velit at, pretium varius arcu. Pellentesque efficitur lectus vel leo luctus pulvinar. Donec eget erat ante. Vestibulum eu semper lorem. Vivamus a libero sit amet purus pretium placerat at vel tellus. Maecenas ex augue, pharetra eu euismod ac, pulvinar sit amet metus. Nulla et semper leo. Aenean aliquam, dui bibendum finibus tincidunt, turpis ligula molestie dui, eget dignissim metus nulla ut velit. Maecenas dapibus velit urna, ut cursus mi aliquam quis. Nulla sed ante a risus feugiat volutpat in non magna.</string>
+    <string name="delete_account_button">Delete Account</string>
+    <string name="delete_acc_alert_title">Delete Account</string>
+    <string name="delete_acc_alert_message">Are you sure you want to delete your account? You will return to the login screen</string>
+    <string name="delete_acc_alert_neg_button">Cancel</string>
+    <string name="delete_acc_alert_pos_button">Delete</string>
+    <string name="account_deleted">Account deleted</string>
 </resources>

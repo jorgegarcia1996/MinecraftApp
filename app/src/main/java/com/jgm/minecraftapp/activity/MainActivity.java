@@ -6,30 +6,25 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.jgm.minecraftapp.R;
-import com.jgm.minecraftapp.adapter.BlockAdapter;
 import com.jgm.minecraftapp.fragment.BlocksFragment;
 import com.jgm.minecraftapp.fragment.HomeFragment;
 import com.jgm.minecraftapp.fragment.MobsFragment;
-import com.jgm.minecraftapp.model.Block;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private final int PROFILE_REQUEST = 30;
+    private final int RESULT_DEL_ACC = 31;
 
     private FirebaseAuth fbAuth;
 
@@ -59,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.mainContainerLayout, homeFragment)
                 .commit();
-        Log.i("RECYCLER", "Primer fragmento cargado");
         //Acciones del bottomNav
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -121,14 +115,29 @@ public class MainActivity extends AppCompatActivity {
             case R.id.mainMenuProfile:
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 intent.putExtras(getIntent().getExtras());
-                startActivity(intent);
+                startActivityForResult(intent, PROFILE_REQUEST);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    //Comprobar si ya está el fragmento cargado
     public boolean isLoaded(String fClass) {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.mainContainerLayout);
         return (f != null) && (f.getClass().getSimpleName().equals(fClass));
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if( requestCode == PROFILE_REQUEST) {
+            if(resultCode == RESULT_DEL_ACC) {
+                fbAuth.signOut();
+                setResult(RESULT_OK);
+                finish();
+                return;
+            }
+        }
     }
 }

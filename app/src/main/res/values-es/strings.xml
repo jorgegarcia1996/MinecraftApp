@@ -18,7 +18,7 @@
     <string name="cancel_button">Cancelar</string>
     <string name="toast_register_success">Registro completado</string>
     <string name="toast_register_cancel">Registro cancelado</string>
-    <string name="toast_register_empty_field">Campos vacíos</string>
+    <string name="toast_register_empty_field">Complete todos los campos</string>
     <string name="toast_register_bad_password">Las contraseñas no coinciden</string>
     <string name="toast_register_error">El registro a falldo, inténtelo de nuevo más tarde</string>
     <string name="main_welcome">Bienvenido</string>
@@ -34,5 +34,10 @@
     <string name="nationality_hint">Nacionalidad</string>
     <string name="profile_activity_name">Perfil</string>
     <string name="bottom_menu_home">Inicio</string>
-    <string name="home_app_description">Descripción de la app</string>
+    <string name="delete_account_button">Borrar Cuenta</string>
+    <string name="delete_acc_alert_title">Borrar Cuenta</string>
+    <string name="delete_acc_alert_message">¿Estás seguro de que quieres borrar tu cuenta? Volverás a la pantalla de inicio.</string>
+    <string name="delete_acc_alert_neg_button">Cancelar</string>
+    <string name="delete_acc_alert_pos_button">Borrar</string>
+    <string name="account_deleted">Cuenta borrada</string>
 </resources>
