@@ -1,46 +1,34 @@
 package com.jgm.minecraftapp.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
-public class Block {
+public class Block  {
 
-    @Expose
-    @SerializedName("nameSpace")
     private String nameSpace;
 
-    @Expose
-    @SerializedName("drop")
     private String drop;
 
-    @Expose
-    @SerializedName("img")
-    private String image;
+    private String img;
 
-    @Expose
-    @SerializedName("nombre")
-    private String name;
+    private String nombre;
 
-    @Expose
-    @SerializedName("tool")
     private String tool;
 
-    @Expose
-    @SerializedName("stack")
     private Integer stack;
 
-    @Expose
-    @SerializedName("transparent")
     private boolean transparent;
 
-    public Block(String nameSpace, String drop, String image, String name, String tool, Integer stack, boolean transparent) {
+    /*public Block(String nameSpace, String drop, String img, String nombre, String tool, Integer stack, boolean transparent) {
         this.nameSpace = nameSpace;
         this.drop = drop;
-        this.image = image;
-        this.name = name;
+        this.img = img;
+        this.nombre = nombre;
         this.tool = tool;
         this.stack = stack;
         this.transparent = transparent;
+    }*/
+
+    public Block() {
+
     }
 
     public String getNameSpace() {
@@ -59,20 +47,20 @@ public class Block {
         this.drop = drop;
     }
 
-    public String getImage() {
-        return image;
+    public String getImg() {
+        return img;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImg(String image) {
+        this.img = image;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String name) {
+        this.nombre = name;
     }
 
     public String getTool() {
@@ -101,6 +89,14 @@ public class Block {
 
     @Override
     public String toString() {
-        return this.name;
+        return "Block{" +
+                "nameSpace='" + nameSpace + '\'' +
+                ", drop='" + drop + '\'' +
+                ", img='" + img + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", tool='" + tool + '\'' +
+                ", stack=" + stack +
+                ", transparent=" + transparent +
+                '}';
     }
 }

@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragmentBlocksLayout"
+    tools:context=".fragment.BlocksFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.BlocksFragment">
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/fragmentBlocksNestedÇScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragmentBlocksRecycler"
@@ -20,5 +14,4 @@
 
 
         </androidx.recyclerview.widget.RecyclerView>
-    </androidx.core.widget.NestedScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

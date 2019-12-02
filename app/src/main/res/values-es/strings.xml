@@ -28,14 +28,11 @@
     <string name="bottom_menu_blocks">Bloques</string>
     <string name="profile_picture_description">Imagen de perfil</string>
     <string name="profile_load_iamge_fail">Error al cargar la imagen de perfil</string>
-<<<<<<< HEAD
     <string name="profile_cancel_changes">Cancelado</string>
     <string name="profile_update_success">Información de perfil actualizada correctamente</string>
     <string name="profile_update_fail">Fallo al actualizar el perfil</string>
     <string name="nationality_hint">Nacionalidad</string>
     <string name="profile_activity_name">Perfil</string>
-=======
     <string name="bottom_menu_home">Inicio</string>
     <string name="home_app_description">Descripción de la app</string>
->>>>>>> Recycler
 </resources>

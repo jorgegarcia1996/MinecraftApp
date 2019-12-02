@@ -19,37 +19,24 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.jgm.minecraftapp.R;
 import com.jgm.minecraftapp.adapter.BlockAdapter;
-import com.jgm.minecraftapp.client.Client;
 import com.jgm.minecraftapp.fragment.BlocksFragment;
 import com.jgm.minecraftapp.fragment.HomeFragment;
 import com.jgm.minecraftapp.fragment.MobsFragment;
 import com.jgm.minecraftapp.model.Block;
-import com.jgm.minecraftapp.service.BlockService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
-public class MainActivity extends AppCompatActivity implements BlockAdapter.BlocksListenerInterface {
+public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth fbAuth;
-    private FirebaseDatabase fbDatabase;
 
     private BottomNavigationView bottomNav;
-    private RecyclerView recycler;
     private Fragment homeFragment = new HomeFragment();
     private Fragment blocksFragment = new BlocksFragment();
     private Fragment mobsFragment = new MobsFragment();
-
-    private String urlBase;
-    private String urlBlocks;
-    private BlockService blockService;
-    private List<Block> blocksData;
-    private BlockAdapter blockAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,47 +51,13 @@ public class MainActivity extends AppCompatActivity implements BlockAdapter.Bloc
         //FB Auth
         fbAuth = FirebaseAuth.getInstance();
 
-        fbDatabase = FirebaseDatabase.getInstance();
-
-        urlBase = fbDatabase.getReference().toString();
-        urlBlocks = urlBase + "/blocks/";
-
         //BottonNav
         bottomNav = findViewById(R.id.bottomNavigationMenu);
 
-        blocksData = new ArrayList<>();
-        blockAdapter = new BlockAdapter(this, new BlockAdapter.BlocksListenerInterface() {
-            @Override
-            public void onBlockClickListener(Block item) {
-                Toast.makeText(getApplicationContext(), item.getNameSpace(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //Recycler View
-
-        Log.i("RECYCLER", "Enlazando la vista");
-        recycler = findViewById(R.id.mainRecyclerLayout);
-
-        Log.i("RECYCLER", "Estableciento el layout manager");
-        recycler.setLayoutManager(new LinearLayoutManager(this));
-
-        Log.i("RECYCLER", "Asignando el adaptador");
-        recycler.setAdapter(blockAdapter);
-
-        Log.i("RECYCLER", "Instanciando el servicio");
-        blockService = Client.getService(urlBlocks);
-
-        Log.i("RECYCLER", "Iniciando el recycler");
-        registerForContextMenu(recycler);
-
-        Log.i("RECYCLER", "Cargando los datos");
-        loadBlocks();
-
-        Log.i("RECYCLER", "Datos cargados");
         //Cargar primer fragmento
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.mainRecyclerLayout, homeFragment)
+                .replace(R.id.mainContainerLayout, homeFragment)
                 .commit();
         Log.i("RECYCLER", "Primer fragmento cargado");
         //Acciones del bottomNav
@@ -116,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements BlockAdapter.Bloc
                         if (!isLoaded(homeFragment.getClass().getSimpleName())) {
                             getSupportFragmentManager()
                                     .beginTransaction()
-                                    .replace(R.id.mainRecyclerLayout, homeFragment)
+                                    .replace(R.id.mainContainerLayout, homeFragment)
                                     .commit();
                         }
 
@@ -126,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements BlockAdapter.Bloc
                         if (!isLoaded(blocksFragment.getClass().getSimpleName())) {
                             getSupportFragmentManager()
                                     .beginTransaction()
-                                    .replace(R.id.mainRecyclerLayout, blocksFragment)
+                                    .replace(R.id.mainContainerLayout, blocksFragment)
                                     .commit();
                         }
                         break;
@@ -135,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements BlockAdapter.Bloc
                         if (!isLoaded(mobsFragment.getClass().getSimpleName())) {
                             getSupportFragmentManager()
                                     .beginTransaction()
-                                    .replace(R.id.mainRecyclerLayout, mobsFragment)
+                                    .replace(R.id.mainContainerLayout, mobsFragment)
                                     .commit();
                         }
                         break;
@@ -174,36 +127,8 @@ public class MainActivity extends AppCompatActivity implements BlockAdapter.Bloc
         return super.onOptionsItemSelected(item);
     }
 
-    private void loadBlocks() {
-
-        //Una forma de acceder a los datos de la api de forma asíncrona
-        blockService.getBlocks().enqueue(new Callback<List<Block>>() {
-            @Override
-            public void onResponse(Call<List<Block>> call, Response<List<Block>> response) {
-                if (response.isSuccessful()) {
-                    blocksData = response.body();
-                    //Proceso para mostrar los datos
-                    Log.i("APP", "Los bloques se han cargado");
-
-                    //Notificar los cambios en los datos
-                    blockAdapter.setData(blocksData);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Block>> call, Throwable t) {
-                Log.i("APP", "Fallo al cargar los bloques");
-            }
-        });
-    }
-
     public boolean isLoaded(String fClass) {
-        Fragment f = getSupportFragmentManager().findFragmentById(R.id.mainRecyclerLayout);
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.mainContainerLayout);
         return (f != null) && (f.getClass().getSimpleName().equals(fClass));
-    }
-
-    @Override
-    public void onBlockClickListener(Block item) {
-
     }
 }

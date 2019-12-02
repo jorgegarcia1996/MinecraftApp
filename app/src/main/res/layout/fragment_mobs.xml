@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/mobsFragment"
     tools:context=".fragment.MobsFragment">
-
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragmentMobsRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Prueba Mobs Fragment" />
+        tools:context=".fragment.BlocksFragment">
+    </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

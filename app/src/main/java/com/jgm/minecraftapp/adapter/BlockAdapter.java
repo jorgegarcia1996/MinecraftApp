@@ -1,6 +1,8 @@
 package com.jgm.minecraftapp.adapter;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,25 +18,22 @@ import com.jgm.minecraftapp.model.Block;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class BlockAdapter extends RecyclerView.Adapter<BlockAdapter.BlockHolder>{
 
-    private List<Block> data;
+    private ArrayList<Block> data;
     private int index;
-    private BlocksListenerInterface blockListenerInterface;
     private Context context;
 
 
 
-    public BlockAdapter(Context context, BlocksListenerInterface blockListener) {
-        this.data = new ArrayList<Block>();
-        this.blockListenerInterface = blockListener;
+    public BlockAdapter(Context context) {
+        this.data = new ArrayList<>();
         this.context = context;
     }
 
 
-    public void setData(List<Block> sdata) {
+    public void setData(ArrayList<Block> sdata) {
         this.data = sdata;
         notifyDataSetChanged();
     }
@@ -57,6 +56,7 @@ public class BlockAdapter extends RecyclerView.Adapter<BlockAdapter.BlockHolder>
     @Override
     public void onBindViewHolder(@NonNull BlockHolder holder, int position) {
         holder.BindHolder(data.get(position));
+        Log.i("POSITION", "" + position);
     }
 
 
@@ -68,38 +68,29 @@ public class BlockAdapter extends RecyclerView.Adapter<BlockAdapter.BlockHolder>
     public class BlockHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 
         private TextView namespace;
-        //private ImageView image;
+        private ImageView image;
 
         public BlockHolder(@NonNull View itemView) {
             super(itemView);
-            this.namespace = itemView.findViewById(R.id.itemName);
-            //this.image = itemView.findViewById(R.id.itemImage);
+            namespace = itemView.findViewById(R.id.itemName);
+            image = itemView.findViewById(R.id.itemImage);
         }
+
+        public void BindHolder(Block block) {
+            namespace.setText(block.getNameSpace());
+            Log.i("IMAGE", "" + block.toString());
+            Picasso.get().load(block.getImg()).into(image);
+
+
+
+        }
+
 
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 
         }
 
-        public void BindHolder(Block block) {
 
-            //Pulsación simple
-            itemView.setOnClickListener(v -> blockListenerInterface.onBlockClickListener(block));
-            namespace.setText(block.getNameSpace());
-            //Cargar la imagen
-            //Picasso.get().load(block.getImage()).into(image);
-
-            itemView.setOnLongClickListener( (view) ->{
-                index = getAdapterPosition();
-                return false;
-            });
-
-
-        }
-
-    }
-
-    public interface BlocksListenerInterface {
-        void onBlockClickListener(Block item);
     }
 }
