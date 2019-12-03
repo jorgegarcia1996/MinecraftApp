@@ -2,7 +2,16 @@
 
 ## Índice
 
-<a href="#base-de-datos">* Base de datos</a>
+* <a href="#base-de-datos">Base de datos</a>
+* <a href="#internacionalización">Internacionalización</a>
+* <a href="#login">Login</a>
+* <a href="#registro">Registro</a>
+* <a href="#página-principal">Página principal</a>
+* <a href="#bloques">Bloques</a>
+* <a href="#mobs">Mobs</a>
+* <a href="#perfil">Perfil</a>
+* <a href="#editar-perfil">Editar perfil</a>
+* <a href="#borrar-perfil">Borrar perfil</a>
 
 ## Base de datos
 
