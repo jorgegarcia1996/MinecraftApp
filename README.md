@@ -11,6 +11,10 @@ Tabla de mobs.
 Tabla de usuarios.
 <img src="./Screenshots/TablaUsuarios.png">
 
+## Internacionalización
+
+La aplicacón está disponible en español y en inglés, por defecto se utilizará el inglés.
+
 ## Login
 
 La primera pantalla de la app es el login, el usuario es tu email y hay un botón par acceder al registro.
