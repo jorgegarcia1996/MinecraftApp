@@ -1,3 +1,3 @@
 # MinecraftApp
 
-Aplicación para PMDP
+Aplicación para PMDP (solo falta completar el readme para la edicion de diciembre)
