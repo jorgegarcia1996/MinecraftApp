@@ -1,5 +1,9 @@
 # MinecraftApp
 
+## Índice
+
+<a href="#base-de-datos">* Base de datos</a>
+
 ## Base de datos
 
 Tabla de bloques.
