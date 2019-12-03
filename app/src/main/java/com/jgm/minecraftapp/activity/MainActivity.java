@@ -2,7 +2,6 @@ package com.jgm.minecraftapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final int PROFILE_REQUEST = 30;
     private final int RESULT_DEL_ACC = 31;
+    private final int RESULT_EXIT_PROFILE = 32;
 
     private FirebaseAuth fbAuth;
 
@@ -137,7 +137,9 @@ public class MainActivity extends AppCompatActivity {
                 setResult(RESULT_OK);
                 finish();
                 return;
-            }
+            } else if(resultCode == RESULT_EXIT_PROFILE) {
+
+           }
         }
     }
 }

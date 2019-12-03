@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,8 @@ import com.squareup.picasso.Picasso;
 public class ProfileActivity extends AppCompatActivity {
 
     private final int DEL_ACC_CODE = 31;
+    private final int RESULT_EXIT_PROFILE = 32;
+
 
     private FirebaseStorage storage;
     private FirebaseDatabase database;
@@ -120,6 +123,8 @@ public class ProfileActivity extends AppCompatActivity {
                 database.getReference().child("usuarios").child(uid).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        //actualizar los datos del bundle
+                        bundle.putSerializable("userData", user);
                         Toast.makeText(getApplicationContext(), R.string.profile_update_success, Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -131,8 +136,6 @@ public class ProfileActivity extends AppCompatActivity {
                 updateFields();
             }
         });
-        //actualizar los datos del bundle
-        bundle.putSerializable("userData", user);
 
         //Borrar cuenta
         deleteAccount.setOnClickListener(new View.OnClickListener() {
@@ -219,9 +222,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     //Volver al la actividad principal
     public boolean onOptionsItemSelected(MenuItem item){
-        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+        /*Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
         intent.putExtras(bundle);
-        startActivity(intent);
+        startActivity(intent);*/
+        Intent intent = new Intent();
+        intent.putExtras(bundle);
+        setResult(RESULT_EXIT_PROFILE, intent);
+        this.finish();
         return true;
     }
 
