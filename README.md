@@ -76,7 +76,7 @@ Si clicas en guardar se actualizan los datos en la base de datos y en la pantall
 
 Para eliminar tu cuenta de la aplicación, está el botón de "borrar cuenta", el cual abre una alerta para confirmar el borrado.
 
-<img src="./Screenshots/AlertaBorrarCuenta.png" width="200px">
+<img src="./Screenshots/AletaBorrarCuenta.png" width="200px">
 
 Si se cancela solo se cierra la alerta, pero si confirmamos el borrado de la cuenta, se borra la misma y nos devuelve a la pantalla de login.
 
